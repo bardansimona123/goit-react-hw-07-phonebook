@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { persistStore, persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage'; // importă storage
-import contactsReducer from './contactsSlice'; // Asigură-te că această cale este corectă
+import storage from 'redux-persist/lib/storage'; 
+import contactsReducer from './contactsSlice'; 
 
 const persistConfig = {
   key: 'root',
@@ -14,6 +14,13 @@ export const store = configureStore({
   reducer: {
     contacts: persistedReducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        // Ignore persist actions that may contain non-serializable values
+        ignoredActions: ['persist/PERSIST', 'persist/REHYDRATE'],
+      },
+    }),
 });
 
-export const persistor = persistStore(store); // Asigură-te că acest export este inclus
+export const persistor = persistStore(store); // Ensure this export is included

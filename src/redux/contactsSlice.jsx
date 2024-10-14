@@ -6,12 +6,15 @@ const contactsSlice = createSlice({
   initialState: {
     contacts: [],
     filter: '',
+    isLoading: false,
+    error: null,
   },
   reducers: {
     setFilter(state, action) {
       state.filter = action.payload;
     },
     removeContact(state, action) {
+      console.log('removeContact action:', action);
       const index = state.contacts.findIndex(contact => contact.id === action.payload);
       if (index !== -1) {
         state.contacts.splice(index, 1);
@@ -20,24 +23,48 @@ const contactsSlice = createSlice({
     createContact(state, action) {
       state.contacts.push(action.payload);
     },
+    setContacts(state, action) {
+      state.contacts = action.payload; // Setează lista de contacte
+    },
+    setLoading(state, action) {
+      state.isLoading = action.payload; // Setează starea de încărcare
+    },
+    setError(state, action) {
+      state.error = action.payload; // Setează mesajul de eroare
+    },
   },
 });
 
-export const { createContact, removeContact, setFilter } = contactsSlice.actions;
+export const { createContact, removeContact, setFilter, setContacts, setLoading, setError } = contactsSlice.actions;
 
 export const getContacts = () => async (dispatch) => {
-  const contacts = await fetchContacts();
-  dispatch(createContact(contacts));
+  dispatch(setLoading(true)); // Setează încărcarea la true
+  try {
+    const contacts = await fetchContacts();
+    dispatch(setContacts(contacts)); // Folosește setContacts pentru a adăuga lista de contacte
+  } catch (error) {
+    dispatch(setError(error.message)); // Setează eroarea în caz de eșec
+  } finally {
+    dispatch(setLoading(false)); // Indiferent de rezultat, setează încărcarea la false
+  }
 };
 
 export const addContact = (contact) => async (dispatch) => {
-  const newContact = await apiAddContact(contact);
-  dispatch(createContact(newContact));
+  try {
+    const newContact = await apiAddContact(contact);
+    dispatch(createContact(newContact));
+  } catch (error) {
+    dispatch(setError(error.message)); // Gestionează erorile pentru adăugarea contactelor
+  }
 };
 
 export const deleteContact = (id) => async (dispatch) => {
-  await apiDeleteContact(id);
-  dispatch(removeContact(id));
+  try {
+    await apiDeleteContact(id);
+    dispatch(removeContact(id));
+  } catch (error) {
+    dispatch(setError(error.message)); // Gestionează erorile pentru ștergerea contactelor
+  }
 };
 
 export default contactsSlice.reducer;
