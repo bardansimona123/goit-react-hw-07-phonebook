@@ -4,7 +4,7 @@ import axios from 'axios';
 const API_URL = 'https://670d415d073307b4ee42e557.mockapi.io/contacts';
 
 export const fetchContacts = async () => {
-  console.log('Fetched from API:', response.data);
+  
   const response = await axios.get(API_URL);
   return response.data;
 };
