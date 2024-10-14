@@ -1,24 +1,20 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from '../redux/contactsSlice';
-import { nanoid } from 'nanoid';
+import { useDispatch } from 'react-redux';
+import { addContact } from '../redux/contactsSlice'; // Asigură-te că importi acțiunea corectă
 import styles from './App.module.css';
 
 const ContactForm = () => {
+  const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
-  const contacts = useSelector((state) => state.contacts.contacts);
-  const dispatch = useDispatch();
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    if (contacts.some(contact => contact.name.toLowerCase() === name.toLowerCase())) {
-      alert(`${name} este deja în agendă`);
-      return;
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (name && number) {
+      dispatch(addContact({ name, number })); // Apelează acțiunea addContact
+      setName('');
+      setNumber('');
     }
-    dispatch(addContact({ id: nanoid(), name, number }));
-    setName('');
-    setNumber('');
   };
 
   return (

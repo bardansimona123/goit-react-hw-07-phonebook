@@ -30,14 +30,16 @@ h2 {
 }
 
 label {
-  display: block; /* Asigură-te că label-urile sunt blocuri */
-  margin-bottom: 5px; /* Spațiu între label și input */
+  display: flex; /* Asigură-te că label-urile sunt blocuri */
+  flex-direction: column;
+  gap: 10px;
 }
 
 input {
   width: 40%; /* Lățimea inputului setată la 50% pentru a fi mai mică */
   padding: 10px; /* Padding interior pentru câmp */
   margin-bottom: 10px; /* Spațiu între câmpuri */
+  margin-top: 10px;
   border: 1px solid #ccc; /* Bordură câmp */
   border-radius: 4px; /* Colțuri rotunjite pentru câmp */
 }
