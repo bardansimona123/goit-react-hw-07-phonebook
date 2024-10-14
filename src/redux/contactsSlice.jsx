@@ -38,14 +38,14 @@ const contactsSlice = createSlice({
 export const { createContact, removeContact, setFilter, setContacts, setLoading, setError } = contactsSlice.actions;
 
 export const getContacts = () => async (dispatch) => {
-  dispatch(setLoading(true)); // Setează încărcarea la true
+  dispatch(setLoading(true)); 
   try {
     const contacts = await fetchContacts();
-    dispatch(setContacts(contacts)); // Folosește setContacts pentru a adăuga lista de contacte
+    dispatch(setContacts(contacts)); 
   } catch (error) {
-    dispatch(setError(error.message)); // Setează eroarea în caz de eșec
+    dispatch(setError(error.message)); 
   } finally {
-    dispatch(setLoading(false)); // Indiferent de rezultat, setează încărcarea la false
+    dispatch(setLoading(false)); 
   }
 };
 
@@ -54,7 +54,7 @@ export const addContact = (contact) => async (dispatch) => {
     const newContact = await apiAddContact(contact);
     dispatch(createContact(newContact));
   } catch (error) {
-    dispatch(setError(error.message)); // Gestionează erorile pentru adăugarea contactelor
+    dispatch(setError(error.message)); 
   }
 };
 
