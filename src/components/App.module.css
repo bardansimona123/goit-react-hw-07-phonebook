@@ -1,0 +1,76 @@
+.container {
+  padding: 20px; /* Padding interior pentru container */
+  background-color: hsl(0, 0%, 100%); /* Fundal deschis */
+  border-radius: 8px; /* Colțuri rotunjite */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Umbră ușoară */
+  min-height: 100vh; /* Asigură-te că umple toată înălțimea vizibilă */
+  display: flex;
+  flex-direction: column; /* Alinierea componentelor pe verticală */
+}
+
+h1 {
+  font-size: 2rem; /* Mărimea titlului */
+  text-align: left; /* Aliniere la stânga pentru titlu */
+  color: #333; /* Culoare titlu */
+}
+
+h2 {
+  font-size: 1.5rem; /* Mărimea subtitlului */
+  margin-top: 20px; /* Marginea de sus */
+  text-align: left; /* Aliniere la stânga pentru subtitlu */
+}
+
+.formContainer {
+  border: 1px solid #ccc; /* Bordură pentru formular */
+  border-radius: 4px; /* Colțuri rotunjite pentru formular */
+  padding: 15px; /* Padding interior pentru formular */
+  margin-bottom: 20px; /* Spațiu între formular și lista de contacte */
+  background-color: white; /* Fundal alb pentru formular */
+  width: 40%;
+}
+
+label {
+  display: block; /* Asigură-te că label-urile sunt blocuri */
+  margin-bottom: 5px; /* Spațiu între label și input */
+}
+
+input {
+  width: 40%; /* Lățimea inputului setată la 50% pentru a fi mai mică */
+  padding: 10px; /* Padding interior pentru câmp */
+  margin-bottom: 10px; /* Spațiu între câmpuri */
+  border: 1px solid #ccc; /* Bordură câmp */
+  border-radius: 4px; /* Colțuri rotunjite pentru câmp */
+}
+
+  
+
+button {
+  width: 44%; /* Lățimea butonului */
+  padding: 10px; /* Padding interior pentru buton */
+  background-color: #007bff; /* Culoarea de fundal a butonului */
+  color: white; /* Culoarea textului */
+  border: none; /* Elimină bordura butonului */
+  border-radius: 4px; /* Colțuri rotunjite pentru buton */
+  cursor: pointer; /* Arată pointerul când se plasează deasupra butonului */
+}
+
+button:hover {
+  background-color: #0056b3; /* Schimbă culoarea fundalului la hover */
+}
+
+.contactItem {
+  display: flex; /* Flexbox pentru lista de contacte */
+  justify-content: space-between; /* Împarte contactele */
+  padding: 10px; /* Padding pentru fiecare element de contact */
+  border-bottom: 1px solid #ccc; /* Bordură între contacte */
+}
+
+.contactItem:last-child {
+  border-bottom: none; /* Elimină bordura de la ultimul element */
+}
+
+.filterInput {
+  width: 17%;
+  border: 1px solid #ccc; /* Bordură câmp */
+  border-radius: 4px; /* Colțuri rotunjite pentru câmp */
+}
