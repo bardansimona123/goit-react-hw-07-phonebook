@@ -6,7 +6,7 @@ import Filter from './Filter';
 import styles from './App.module.css'; 
 
 const App = () => {
-  const contacts = useSelector((state) => state.contacts.contacts); // Obține contactele din store
+  const contacts = useSelector((state) => state.contacts.contacts); 
 
   return (
     <div className={styles.container}>
@@ -16,7 +16,7 @@ const App = () => {
       </div>
       <h2>Contacts</h2>
       <Filter />
-      <ContactList contacts={contacts} />
+      <ContactList contacts={contacts} /> 
     </div>
   );
 };

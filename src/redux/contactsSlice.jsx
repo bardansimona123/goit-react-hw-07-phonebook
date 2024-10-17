@@ -4,7 +4,8 @@ import { fetchContacts, addContact as apiAddContact, deleteContact as apiDeleteC
 const contactsSlice = createSlice({
   name: 'contacts',
   initialState: {
-    contacts: [],
+    // Modifică 'contacts' la 'items' pentru a se potrivi cu selecția din ContactList
+    items: [], // Array-ul de contacte, schimbat de la 'contacts' la 'items'
     filter: '',
     isLoading: false,
     error: null,
@@ -14,17 +15,16 @@ const contactsSlice = createSlice({
       state.filter = action.payload;
     },
     removeContact(state, action) {
-      console.log('removeContact action:', action);
-      const index = state.contacts.findIndex(contact => contact.id === action.payload);
+      const index = state.items.findIndex(contact => contact.id === action.payload); // Folosește 'items' aici
       if (index !== -1) {
-        state.contacts.splice(index, 1);
+        state.items.splice(index, 1);
       }
     },
     createContact(state, action) {
-      state.contacts.push(action.payload);
+      state.items.push(action.payload); // Folosește 'items' aici
     },
     setContacts(state, action) {
-      state.contacts = action.payload; // Setează lista de contacte
+      state.items = action.payload; // Folosește 'items' aici
     },
     setLoading(state, action) {
       state.isLoading = action.payload; // Setează starea de încărcare
@@ -35,8 +35,10 @@ const contactsSlice = createSlice({
   },
 });
 
+// Exportă acțiunile
 export const { createContact, removeContact, setFilter, setContacts, setLoading, setError } = contactsSlice.actions;
 
+// Funcția pentru a obține contactele
 export const getContacts = () => async (dispatch) => {
   dispatch(setLoading(true)); 
   try {
@@ -49,6 +51,7 @@ export const getContacts = () => async (dispatch) => {
   }
 };
 
+// Funcția pentru a adăuga un contact
 export const addContact = (contact) => async (dispatch) => {
   try {
     const newContact = await apiAddContact(contact);
@@ -58,6 +61,7 @@ export const addContact = (contact) => async (dispatch) => {
   }
 };
 
+// Funcția pentru a șterge un contact
 export const deleteContact = (id) => async (dispatch) => {
   try {
     await apiDeleteContact(id);
@@ -67,4 +71,5 @@ export const deleteContact = (id) => async (dispatch) => {
   }
 };
 
+// Exportă reducer-ul
 export default contactsSlice.reducer;
